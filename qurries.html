@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group 7</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        &#9776;
+      </button>
+      <div class="container">
+        <nav>
+          <ul>
+            <li><a href="landingpage.html">Home</a></li>
+            <li><a href="rationale.html">Rationale</a></li>
+            <li><a href="objectives.html">Objectives</a></li>
+            <li>
+              <a href="database_architechture.html">Database Architecture</a>
+            </li>
+            <li><a href="erd.html">ERD</a></li>
+            <li><a href="qurries.html" class="active">Querries</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="content">
+      <a
+        href="https://www.db-fiddle.com/f/qMT2pYqA3jsamz8vt8VYbM/5"
+        class="download-btn"
+        target="_blank"
+        >DB Fiddle Link</a
+      >
+      <div class="text-box">
+        <h3>RFID Table</h3>
+        <p>
+          CREATE TABLE RFIDTag (<br />
+          stickerID VARCHAR(10) PRIMARY KEY,<br />tagCode VARCHAR(50),<br />
+          issuedAt DATETIME,<br />
+          status ENUM('active', 'inactive'),<br />
+          expirationDate DATE);
+        </p>
+        <br />
+        <h3>TemporaryVehiclePass Table</h3>
+        <p>
+          CREATE TABLE TemporaryVehiclePass ( passID VARCHAR(10) PRIMARY KEY,<br />
+          visitorID VARCHAR(10),<br />
+          issueDate DATE,<br />
+          expiryDate DATE,<br />
+          status ENUM('active', 'expired') );
+        </p>
+        <br />
+        <h3>visitor Table</h3>
+        <p>
+          CREATE TABLE visitor ( visitorID VARCHAR(10) PRIMARY KEY,<br />
+          passID VARCHAR(10),<br />
+          fullName VARCHAR(100),<br />
+          plateNum VARCHAR(20),<br />
+          purposeOfVisit TEXT,<br />
+          FOREIGN KEY (passID) REFERENCES TemporaryVehiclePass(passID) );
+        </p>
+        <br />
+        <h3>Vehicle Table</h3>
+        <p>
+          CREATE TABLE Vehicle ( plateNum VARCHAR(20) PRIMARY KEY,<br />
+          OwnerID VARCHAR(10),<br />
+          stickerID VARCHAR(10),<br />
+          visitorID VARCHAR(10),<br />
+          vehicleType VARCHAR(50),<br />
+          model VARCHAR(50),<br />
+          manufacturer VARCHAR(50),<br />
+          color VARCHAR(30),<br />
+          cubicCapacity INT,<br />
+          numOfWheels INT, fuelType VARCHAR(30),<br />
+          driverLicenseNum VARCHAR(30),<br />
+          FOREIGN KEY (stickerID) REFERENCES RFIDTag(stickerID),<br />
+          FOREIGN KEY (visitorID) REFERENCES visitor(visitorID) );
+        </p>
+        <br />
+        <h3>USER Table</h3>
+        <p>
+          CREATE TABLE USER ( userID VARCHAR(10) PRIMARY KEY,<br />
+          registrationID VARCHAR(10),<br />
+          passID VARCHAR(10),<br />
+          username VARCHAR(50) NOT NULL UNIQUE,<br />
+          password VARCHAR(255) NOT NULL,<br />
+          role ENUM('student', 'employee', 'admin') NOT NULL );
+        </p>
+        <br />
+        <h3>document Table</h3>
+        <p>
+          CREATE TABLE document ( documentID VARCHAR(10) PRIMARY KEY,<br />
+          registrationID VARCHAR(10),<br />
+          documentType VARCHAR(50),<br />
+          filePath VARCHAR(255),<br />
+          uploadedAt DATETIME );
+        </p>
+        <br />
+        <h3>registration Table</h3>
+        <p>
+          CREATE TABLE registration ( registrationID VARCHAR(10) PRIMARY KEY,<br />
+          userID VARCHAR(10),<br />
+          plateNum VARCHAR(20),<br />
+          documentID VARCHAR(10),<br />
+          approvalCode VARCHAR(50),<br />
+          registrationDate DATETIME,<br />
+          FOREIGN KEY (userID) REFERENCES USER(userID),<br />
+          FOREIGN KEY (plateNum) REFERENCES Vehicle(plateNum),<br />
+          FOREIGN KEY (documentID) REFERENCES document(documentID) );
+        </p>
+        <br />
+        <h3>VehicleOwner Table</h3>
+        <p>
+          CREATE TABLE VehicleOwner ( OwnerID VARCHAR(10) PRIMARY KEY,<br />
+          plateNum VARCHAR(20),<br />
+          registrationID VARCHAR(10),<br />
+          fName VARCHAR(50),<br />
+          lName VARCHAR(50),<br />
+          role VARCHAR(30),<br />
+          department VARCHAR(50),<br />
+          email VARCHAR(100),<br />
+          course VARCHAR(50),<br />
+          year VARCHAR(10),<br />
+          section VARCHAR(10),<br />
+          academicYear VARCHAR(20),<br />
+          designation VARCHAR(50),<br />
+          employmentStatus VARCHAR(50),<br />
+          registrationStatus ENUM('pending', 'approved', 'rejected'),<br />
+          FOREIGN KEY (plateNum) REFERENCES Vehicle(plateNum),<br />
+          FOREIGN KEY (registrationID) REFERENCES registration(registrationID)
+          );
+        </p>
+      </div>
+    </div>
+    <footer class="site-footer">
+      Group Members: David Natan Apruebo &ndash; Aerella Lou Nicor &ndash;
+      Emmilry Cadesim &ndash; Shekinah Gayonoche &ndash; Christian Porras
+    </footer>
+
+    <script>
+      const toggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector("nav");
+      toggle.addEventListener("click", () => {
+        nav.classList.toggle("open");
+      });
+    </script>
+  </body>
+</html>

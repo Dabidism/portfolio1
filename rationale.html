@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group 7</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        &#9776;
+      </button>
+      <div class="container">
+        <nav>
+          <ul>
+            <li><a href="landingpage.html">Home</a></li>
+            <li><a href="rationale.html" class="active">Rationale</a></li>
+            <li><a href="objectives.html">Objectives</a></li>
+            <li>
+              <a href="database_architechture.html">Database Architecture</a>
+            </li>
+            <li><a href="erd.html">ERD</a></li>
+            <li><a href="qurries.html">Querries</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="content">
+      <div class="text-box">
+        <p>
+          Rationale Nowadays, university gate entry and exit systems have a huge
+          role in premises security, traditional methods like ID checks or
+          manual logbook records are often used to entry access university gate
+          systems. However These methods can cause human error, without a
+          real-time system, security personnel may have difficulty monitoring
+          incoming vehicles which could increase the risk of security
+          violations. <br /><br />
+          The proposed Smart Vehicle Gate Pass System, which integrates Radio
+          Frequency Identification (RFID) and Automatic Number Plate Recognition
+          (ANPR) technologies, aims to address these issues by providing a
+          smart, web-based platform for the university premises. Each registered
+          vehicle has a unique RFID tag that instantly detects as it approaches
+          the campus gate. While this happens, a high-resolution camera captures
+          the license plate, to verify the plate number registered based on the
+          database record. By combining an RFID tag and ANPR it cross-match the
+          recorded data based on the registered vehicles, the system can reduce
+          the risk of tag-cloning, transferring to another vehicle, or license
+          plate forgery. It also automates the process of logging each vehicle's
+          entry and exit, including vehicle information, timestamps, and parking
+          status, without the need for manual input. This dual-verification
+          method improves the accuracy of vehicle identification while reducing
+          the chances of human error. Additionally, the automated data
+          collection and verification helps lessen the administrative workload,
+          enhances response times, and streamlines overall gate operations.
+          <br /><br />This system is based on contemporary studies and
+          real-world implementations of vehicle access systems across
+          educational establishments. It responds to the prominent gap in
+          campus-level adoption of integrated, technological-driven gate pass
+          systems. With features such as real-time vehicle tracking, online
+          registration approval, parking availability monitoring, vehicle
+          logging, and data analytics records, the proposed system aligns with
+          the global smart campus system. <br /><br />Eventually, the objective
+          of this study lies in its contribution to campus safety, working
+          efficiency, and digital modification. Introducing a model that is both
+          versatile and expandable. Moreover not only supports Iloilo Science
+          and Technology University (ISAT-U) in its purpose but provides its
+          technological innovation and a helpful consideration for other
+          institutions aiming to modernize their campus security system.
+        </p>
+      </div>
+    </div>
+    <footer class="site-footer">
+      Group Members: David Natan Apruebo &ndash; Aerella Lou Nicor &ndash;
+      Emmilry Cadesim &ndash; Shekinah Gayonoche &ndash; Christian Porras
+    </footer>
+
+    <script>
+      const toggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector("nav");
+      toggle.addEventListener("click", () => {
+        nav.classList.toggle("open");
+      });
+    </script>
+  </body>
+</html>

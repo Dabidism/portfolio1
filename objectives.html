@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group 7</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        &#9776;
+      </button>
+      <div class="container">
+        <nav>
+          <ul>
+            <li><a href="landingpage.html">Home</a></li>
+            <li><a href="rationale.html">Rationale</a></li>
+            <li><a href="objectives.html" class="active">Objectives</a></li>
+            <li>
+              <a href="database_architechture.html">Database Architecture</a>
+            </li>
+            <li><a href="erd.html">ERD</a></li>
+            <li><a href="qurries.html">Querries</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- ...existing code... -->
+    <!-- ...existing code... -->
+    <div class="content">
+      <div class="text-box">
+        <p style="font-size: 30px"><strong>Objectives</strong></p>
+        <p style="text-indent: 2em">
+          The objective of this project is to develop an Intelligent Vehicle
+          Gate Pass System that integrates Radio Frequency Identification (RFID)
+          and Automatic Number Plate Recognition (ANPR).
+        </p>
+        <br />
+        <p style="font-size: 30px"><strong>Specific Objectives:</strong></p>
+        <ul style="padding-left: 2em">
+          <li>
+            Develop a web-based system for managing vehicle access that can:
+          </li>
+          <li>
+            Allow students, employees, and authorized personnel to register
+            online.
+          </li>
+          <li>
+            Enable users to upload required documents or valid identification
+            during online registration.
+          </li>
+          <li>Display available parking space;</li>
+          <li>Categorize vehicle owners based on their level of access;</li>
+          <li>
+            Monitor the number of vehicles that enter and exit the campus;
+          </li>
+          <li>
+            Generate reports for tracking of vehicles using data analytics in
+            the form of graphs and tables.
+          </li>
+        </ul>
+      </div>
+      <!-- <button class="download-btn">Download</button> -->
+      <!-- <div class="photo-container">
+        <img src="placeholder.jpg" alt="Photo" class="photo" />
+      </div> -->
+    </div>
+    <!-- ...existing code... -->
+    <footer class="site-footer">
+      Group Members: David Natan Apruebo &ndash; Aerella Lou Nicor &ndash;
+      Emmilry Cadesim &ndash; Shekinah Gayonoche &ndash; Christian Porras
+    </footer>
+
+    <script>
+      const toggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector("nav");
+      toggle.addEventListener("click", () => {
+        nav.classList.toggle("open");
+      });
+    </script>
+  </body>
+</html>
