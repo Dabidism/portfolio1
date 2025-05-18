@@ -28,7 +28,7 @@
     </div>
     <div class="content">
       <a
-        href="https://www.db-fiddle.com/f/qMT2pYqA3jsamz8vt8VYbM/5"
+        href="https://www.db-fiddle.com/f/qMT2pYqA3jsamz8vt8VYbM/6"
         class="download-btn"
         target="_blank"
         >DB Fiddle Link</a
@@ -132,6 +132,40 @@
           FOREIGN KEY (registrationID) REFERENCES registration(registrationID)
           );
         </p>
+        <br />
+        <h3>EntryExitLog Table</h3>
+        <p>
+          CREATE TABLE EntryExitLog ( logID VARCHAR(10) PRIMARY KEY,<br />
+          plateNum VARCHAR(20),<br />
+          entryTime DATETIME,<br />
+          exitTime DATETIME,<br />
+          rfid BOOLEAN,<br />
+          status ENUM('entered', 'exited', 'denied'),<br />
+          gateLocation VARCHAR(100),<br />
+          FOREIGN KEY (plateNum) REFERENCES Vehicle(plateNum) );
+        </p>
+        <br />
+        <h3>Visitor Log Table</h3>
+        <p>
+          CREATE TABLE VisitorLog ( visitorLogID VARCHAR(10) PRIMARY KEY,<br />
+          visitorID VARCHAR(10),<br />
+          plateNum VARCHAR(20),<br />
+          entryTime DATETIME,<br />
+          exitTime DATETIME,<br />
+          status ENUM('entered', 'exited', 'denied'),<br />
+          FOREIGN KEY (visitorID) REFERENCES visitor(visitorID),<br />
+          FOREIGN KEY (plateNum) REFERENCES Vehicle(plateNum) );
+        </p>
+        <br />
+        <h3>ANPRLog Table</h3>
+        <p>
+          CREATE TABLE ANPRLog ( ANPRLogID VARCHAR(10) PRIMARY KEY,<br />
+          plateNum VARCHAR(20),<br />
+          status ENUM('matched', 'unmatched'),<br />
+          location VARCHAR(100),<br />
+          FOREIGN KEY (plateNum) REFERENCES Vehicle(plateNum) );
+        </p>
+        <br />
       </div>
     </div>
     <footer class="site-footer">
