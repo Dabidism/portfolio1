@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group 7</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        &#9776;
+      </button>
+      <div class="container">
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rationale.html">Rationale</a></li>
+            <li><a href="objectives.html">Objectives</a></li>
+            <li>
+              <a href="database_architechture.html">Database Architecture</a>
+            </li>
+            <li><a href="erd.html">ERD</a></li>
+            <li><a href="queries.html" class="active">Querries</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="content">
+      <a
+        href="https://www.db-fiddle.com/f/5Xii3oPVMPaHBWQnL4RQNS/0"
+        class="download-btn"
+        target="_blank"
+        >DB Fiddle Link</a
+      >
+      <div class="text-box">
+        <h2>
+          Objective 1: Allow students, employees, and authorized personnel to
+          register online.
+        </h2>
+        <br />
+        <p>
+          INSERT INTO registration (<br />registrationID, userID, plateNum,
+          documentID, approvalCode, registrationDate)<br />
+          VALUES (<br />'R001', 'U001', 'ABC1234', 'D001', 'APPROVED2025',
+          NOW());
+        </p>
+        <p>
+          <br />
+          INSERT INTO Vehicle (<br />
+          plateNum, OwnerID, stickerID, visitorID, vehicleType, model,
+          manufacturer, color, cubicCapacity, numOfWheels, fuelType,
+          driverLicenseNum ) <br />VALUES (<br />
+          'ABC1234', 'O001', NULL, NULL, 'Car', 'Civic', 'Honda', 'White', 1800,
+          4, 'Gasoline', 'DLN1234567' );
+        </p>
+        <br />
+        <p>
+          INSERT INTO USER (<br />userID, registrationID, passID, username,
+          password, role)<br />
+          VALUES (<br />'U001', 'R001', NULL, 'jdoe', 'hashed_password_here',
+          'student');
+        </p>
+        <br />
+
+        <h2>
+          Objective 2: Enable users to upload required documents or valid
+          identification during online registration.
+        </h2>
+        <br />
+        <p>
+          INSERT INTO document (<br />documentID, registrationID, documentType,
+          filePath, uploadedAt)<br />
+          VALUES (<br />'D001', 'R001', 'School ID',
+          'uploads/school_id_jdoe.jpg', NOW());
+        </p>
+        <br />
+        <h2>Objective 3: Display available parking space;</h2>
+        <br />
+        <p>
+          SELECT 100 - (<br />
+          SELECT COUNT(*) FROM EntryExitLog WHERE status = 'entered' AND
+          exitTime IS NULL<br />
+          ) AS available_parking_slots;
+        </p>
+        <br />
+        <h2>
+          Objective 4: Categorize vehicle owners based on their level of access;
+        </h2>
+        <br />
+        <p>
+          INSERT INTO VehicleOwner (<br />
+          OwnerID, plateNum, registrationID, fName, lName, role, department,
+          email, course, year, section, academicYear, designation,
+          employmentStatus, registrationStatus )<br />
+          VALUES (<br />
+          'O001', 'ABC1234', NULL, 'John', 'Doe', 'student', 'IT',
+          'jdoe@example.com', 'BSIT', '3rd', 'A', '2024-2025', 'N/A',
+          'enrolled', 'pending' );<br />
+          <br />
+          SELECT role, COUNT(*) AS total_owners<br />
+          FROM VehicleOwner<br />
+          GROUP BY role;
+        </p>
+        <br />
+        <h2>
+          Objective 5: Monitor the number of vehicles that enter and exit the
+          campus;
+        </h2>
+        <br />
+        <p>
+          SELECT<br />
+          COUNT(CASE WHEN status = 'entered' THEN 1 END) AS total_entries,<br />
+          COUNT(CASE WHEN status = 'exited' THEN 1 END) AS total_exits<br />
+          FROM EntryExitLog;<br /><br />
+
+          SELECT<br />
+          COUNT(CASE WHEN status = 'entered' THEN 1 END) AS entries_today,<br />
+          COUNT(CASE WHEN status = 'exited' THEN 1 END) AS exits_today<br />
+          FROM EntryExitLog<br />
+          WHERE DATE(entryTime) = CURDATE() OR DATE(exitTime) = CURDATE();<br /><br />
+        </p>
+        <br />
+        <h2>
+          Objective 6: Generate reports for tracking of vehicles using data
+          analytics in the form of graphs and tables.
+        </h2>
+        <br />
+        <p>
+          SELECT vehicleType, COUNT(*) AS total<br />
+          FROM Vehicle<br />
+          GROUP BY vehicleType;<br /><br />
+
+          SELECT gateLocation, COUNT(*) AS total_access<br />
+          FROM EntryExitLog<br />
+          GROUP BY gateLocation;<br /><br />
+
+          SELECT status, COUNT(*) AS total<br />
+          FROM ANPRLog<br />
+          GROUP BY status;<br /><br />
+
+          SELECT DATE(registrationDate) AS reg_date, COUNT(*) AS
+          total_registrations<br />
+          FROM registration<br />
+          GROUP BY DATE(registrationDate)<br />
+          ORDER BY reg_date;<br /><br />
+        </p>
+        <br />
+      </div>
+    </div>
+    <footer class="site-footer">
+      Group Members: David Natan Apruebo &ndash; Aerella Lou Nicor &ndash;
+      Emmilry Magic Cadesim &ndash; Shekinah Gayonoche &ndash; Christian Porras
+    </footer>
+
+    <script>
+      const toggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector("nav");
+      toggle.addEventListener("click", () => {
+        nav.classList.toggle("open");
+      });
+    </script>
+  </body>
+</html>
